@@ -76,7 +76,7 @@ torchrun --nproc_per_node=1 --master_port 25187 main.py --data $root \
 For small-sized model with cosine self-attention.
 ```bash
 torchrun --nproc_per_node=1 --master_port 25187 main.py --data $root \
-        --model angular_small_quad_224 \
+        --model angular_small_cos_224 \
         -b 200 --lr 1.2e-3 --weight-decay .05 --amp --img-size 224 \
         --warmup-epochs 20 --model-ema-decay 0.99984 --drop-path 0.1 \
         --output results
@@ -93,7 +93,7 @@ torchrun --nproc_per_node=1 --master_port 21521 main.py --data $root \
 
 For base-sized model with cosine self-attention.
 ```bash
-torchrun --nproc_per_node=4 --master_port 25711 main.py --data $root \
+torchrun --nproc_per_node=1 --master_port 25711 main.py --data $root \
         --model angular_base_cos_224 \
         -b 100 --lr 1.2e-3 --weight-decay .05 --amp --img-size 224 \
         --warmup-epochs 20 --model-ema-decay 0.99984 --drop-path 0.1 \
@@ -226,17 +226,17 @@ torchrun --nproc_per_node=1 --master_port 21453 main.py --data $root \
         --output results
 ```
 
-Train our DWAViT-T model with scaled dot-product self-attention for object detection.
+In `/mmdetection`, rrain our DWAViT-T model with scaled dot-product self-attention for object detection.
 ```bash
 bash tools/train.sh configs/angularvit/mask_rcnn_angularvit_exp_t.py 1  --work-dir ./exp_t
 ```
 
-Train our DWAViT-T model with scaled dot-product self-attention for semantic segmentation.
+In `/mmsegmentation`, train our DWAViT-T model with scaled dot-product self-attention for semantic segmentation.
 ```bash
 bash tools/train.sh configs/angularvit/angularvit_exp_tiny.py 1 --work-dir ./exp_t
 ```
 
-For CSWin and Deit with our angular self-attention, just replace the code in `models.py`
+For CSWin and Deit with our angular self-attention for image classification task, just replace the code in `models.py` in their original codebase and run the revelant commands.
 ```python
 q = q * self.scale
 attn = (q @ k.transpose(-2, -1))
