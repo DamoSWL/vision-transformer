@@ -44,7 +44,7 @@ pip install -v -e .
 ### 2. Image Classification
 Pepare the ImageNet-1K dataset.
 
-For tiny-sized model with quadratic self-attention, run the following code to train the model.
+In `vision-transformer/`, for tiny-sized model with quadratic self-attention, run the following code to train the model.
 ```bash
 torchrun --nproc_per_node=1 --master_port 29441 main.py --data $root \
         --model angular_tiny_quad_224 \
@@ -111,7 +111,7 @@ Copy the file `vision-transformer/object detecton/tool/train.sh` to `mmdetection
 
 Create the folder `mmdetection/configs/angularvit` and copy the files under the folder `vision-transformer/object detecton/configs` to folder `mmdetection/configs/angularvit`.
 
-Copy the file `/vision-transformer/object detecton/backbone/angularvit.py` to the folder `mmdetection/mmdet/models/backbones`
+Copy the file `vision-transformer/object detecton/backbone/angularvit.py` to the folder `mmdetection/mmdet/models/backbones`
 
 If you have pre-trained model, add the path in the configuration files. For instance, in `mmdetection/configs/angularvit/mask_rcnn_angularvit_quad_t.py`, modify the value of `pretrained=None`.
 
@@ -121,7 +121,7 @@ lr_config = dict(warmup_iters=500,step=[27, 33])
 runner = dict(max_epochs=36)
 ```
 
-In `/mmdetection`, train the tiny-sized model with quadratic self-attention,
+In `mmdetection/`, train the tiny-sized model with quadratic self-attention,
 ```bash
 bash tools/train.sh configs/angularvit/mask_rcnn_angularvit_quad_t.py 1  --work-dir ./quad_t  #Mask-RCNN
 
@@ -176,14 +176,14 @@ data_root = 'data/ade20k'
 
 Copy the file `vision-transformer/semantic segmentation/tool/train.sh` to `mmsegmentation/tools`.
 
-Create the folder `mmsegmentation/configs/angularvit` and copy the files under the folder `vision-transformer/semantic segmentation/configs` to folder `mmsegmentation/configs/angularvit`.
+Create the folder `mmsegmentation/configs/angularvit` and copy the files under the folder `semantic segmentation/configs` to folder `mmsegmentation/configs/angularvit`.
 
-Copy the file `/vision-transformer/semantic segmentation/backbone/angularvit.py` to the folder `mmsegmentation/mmdet/models/backbones`
+Copy the file `vision-transformer/semantic segmentation/backbone/angularvit.py` to the folder `mmsegmentation/mmdet/models/backbones`
 
 If you have pre-trained model, add the path in the configuration files. For instance, in `mmsegmentation/configs/angularvit/angularvit_quad_t.py`, modify the value of `checkpoint_file=None`.
 
 
-In `/mmsegmentation`, train the tiny-sized model with quadratic self-attention,
+In `mmsegmentation/`, train the tiny-sized model with quadratic self-attention,
 
 ```bash
 bash tools/train.sh configs/angularvit/angularvit_quad_tiny.py 1 --work-dir ./quad_t
@@ -217,7 +217,7 @@ bash tools/train.sh configs/angularvit/angularvit_cos_base.py 1 --work-dir ./cos
 
 ### 4. Ablation Study
 
-Train our DWAViT-T model with scaled dot-product self-attention for image classification.
+In `vision-transformer/`, train our DWAViT-T model with scaled dot-product self-attention for image classification.
 ```bash
 torchrun --nproc_per_node=1 --master_port 21453 main.py --data $root \
         --model angular_tiny_exp_224 \
@@ -226,12 +226,12 @@ torchrun --nproc_per_node=1 --master_port 21453 main.py --data $root \
         --output results
 ```
 
-In `/mmdetection`, rrain our DWAViT-T model with scaled dot-product self-attention for object detection.
+In `mmdetection/`, train our DWAViT-T model with scaled dot-product self-attention for object detection.
 ```bash
 bash tools/train.sh configs/angularvit/mask_rcnn_angularvit_exp_t.py 1  --work-dir ./exp_t
 ```
 
-In `/mmsegmentation`, train our DWAViT-T model with scaled dot-product self-attention for semantic segmentation.
+In `mmsegmentation/`, train our DWAViT-T model with scaled dot-product self-attention for semantic segmentation.
 ```bash
 bash tools/train.sh configs/angularvit/angularvit_exp_tiny.py 1 --work-dir ./exp_t
 ```
