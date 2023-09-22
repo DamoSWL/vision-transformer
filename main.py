@@ -40,7 +40,7 @@ config_parser = parser = argparse.ArgumentParser(description='Training Config', 
 parser.add_argument('-c', '--config', default='', type=str, metavar='FILE',
                     help='YAML config file specifying default arguments')
 
-parser = argparse.ArgumentParser(description='CSWin Training and Evaluating')
+parser = argparse.ArgumentParser(description='DWAViT Training and Evaluating')
 
 # Dataset / Model parameters
 parser.add_argument('--data', default='/mnt/blob/testset/ImageNet', metavar='DIR',
