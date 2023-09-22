@@ -5,12 +5,19 @@ This is the source code for the paper "Dual-windowed Vision Transformer with Ang
 ### 1. Prerequisite
 
 CUDA == 11.4.0
+
 timm == 0.4.5
+
 Pytorch >= 1.10
+
 Numpy >=1.10
+
 MMCV == 1.5.0
+
 MMDetection == 2.25.3
+
 MMSegmentation == 0.23.0
+
 
 
 #### Install MMCV
